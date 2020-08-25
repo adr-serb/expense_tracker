@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<style>
+#error {display:none;color:red}
+</style>
+<head>
+  <title>StartUp</title>
+</head>
+<body>
+
+  <h2>Add new expense</h2>
+
+  <!-- <form method="POST" action="/expenses/add"> -->
+
+    <label for="account">From account:</label><br>
+    <input type="text" id="account" name="account" class="non_null_input" onkeypress="clearValidations(this)"><br><br>
+
+    <label for="amount">Amount:</label><br>
+    <input type="text" id="amount" name="amount" class="non_null_input" onkeypress="clearValidations(this)"><br><br>
+
+    <label for="date">Date:</label><br>
+    <input type="text" id="date" name="date" class="non_null_input" onkeypress="clearValidations(this)">
+    <button type="button" id="getCurrentDate">Get current date</button><br><br>
+
+    <label for="category">Category:</label><br>
+    <input type="text" id="category" name="category" class="non_null_input" onkeypress="clearValidations(this)"><br><br>
+
+    <input type="submit" id="submit" value="Submit" onclick="validateForm()">
+    <p id="error">ERROR! You have empty values in the form.</p>
+
+
+<script>
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  var dateInput = document.getElementById("date");
+  dateInput.setAttribute("value", date);
+</script>
+
+<script>
+  function validateForm() {
+    var error = document.getElementById("error");
+    var elementsToBeChecked = Array.from(document.getElementsByClassName("non_null_input"));
+
+    console.log(elementsToBeChecked);
+    console.log(typeof(elementsToBeChecked));
+
+    error.style.display = "none";
+    elementsToBeChecked.forEach(elem => {
+      if (elem.value === "") {
+        error.style.display = "block";
+        elem.style.borderColor ="red";
+        elem.style.borderWidth = "1px";
+      }
+    });
+  }
+
+  function clearValidations(id) {
+    id.style.borderColor = "black";
+  }
+</script>
+
+<script>
+
+</script>
+</body>
+</html>
